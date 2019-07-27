@@ -29,6 +29,8 @@ def Alabama(url):
         peopleLinks.append(cleanLinks[i])
     print(peopleLinks)
     print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
     return   
 
 def Alaska(url):
@@ -41,6 +43,8 @@ def Alaska(url):
     links = [link.get_attribute('href') for link in a_ele]
     print(links)
     print(len(links))
+    global totalCount 
+    totalCount += len(links)
     return
     
 def Arizona(url):
@@ -71,6 +75,8 @@ def Arizona(url):
             peopleLinks.append(cleanLinks[i])
     print(peopleLinks)
     print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
     return
     
 def Arkansas(url):
@@ -99,6 +105,8 @@ def Arkansas(url):
         peopleLinks.append(cleanLinks[i])
     print(peopleLinks)
     print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
     return
     
 def California(url):
@@ -127,6 +135,8 @@ def California(url):
         peopleLinks.append(cleanLinks[i])
     print(peopleLinks)
     print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
     return
     
 def Colorado(url):
@@ -155,6 +165,8 @@ def Colorado(url):
         peopleLinks.append(cleanLinks[i])
     print(peopleLinks)
     print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
     return
 
 def Connecticut(url):
@@ -183,6 +195,8 @@ def Connecticut(url):
         peopleLinks.append(cleanLinks[i])
     print(peopleLinks)
     print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
     return
 
 def Delaware(url):
@@ -211,6 +225,8 @@ def Delaware(url):
         peopleLinks.append(cleanLinks[i])
     print(peopleLinks)
     print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
     return
 
 #Florida's format is td without width
@@ -234,6 +250,8 @@ def Florida(url):
         cleanLinks.append(links[i])
     print(cleanLinks)
     print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
     return
 
 def Georgia(url):
@@ -262,6 +280,8 @@ def Georgia(url):
         peopleLinks.append(cleanLinks[i])
     print(peopleLinks)
     print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
     return
 
 def Hawaii(url):
@@ -290,6 +310,8 @@ def Hawaii(url):
         peopleLinks.append(cleanLinks[i])
     print(peopleLinks)
     print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
     return
 
 def Idaho(url):
@@ -318,6 +340,8 @@ def Idaho(url):
         peopleLinks.append(cleanLinks[i])
     print(peopleLinks)
     print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
     return
 
 def Illinois(url):
@@ -346,6 +370,8 @@ def Illinois(url):
         peopleLinks.append(cleanLinks[i])
     print(peopleLinks)
     print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
     return
 
 def Indiana(url):
@@ -374,6 +400,8 @@ def Indiana(url):
         peopleLinks.append(cleanLinks[i])
     print(peopleLinks)
     print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
     return
 
 def Iowa(url):
@@ -402,6 +430,8 @@ def Iowa(url):
         peopleLinks.append(cleanLinks[i])
     print(peopleLinks)
     print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
     return
 
 def Kansas(url):
@@ -430,6 +460,8 @@ def Kansas(url):
         peopleLinks.append(cleanLinks[i])
     print(peopleLinks)
     print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
     return
 
 def Kentucky(url):
@@ -454,6 +486,8 @@ def Kentucky(url):
         cleanLinks.append(links[i])
     print(cleanLinks)
     print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
     return
 
 def Louisiana(url):
@@ -476,16 +510,228 @@ def Louisiana(url):
         if val != None and ("wikipedia.org" in val) : 
             cleanLinks.append(val)
     peopleLinks = []
-    print(cleanLinks)
     startIndex = cleanLinks.index('https://es.wikipedia.org/wiki/Ashley_Grace')
     endIndex = cleanLinks.index('https://en.wikipedia.org/wiki/Buckwheat_Zydeco')
     for i in range(startIndex,endIndex+1):
         peopleLinks.append(cleanLinks[i])
     print(peopleLinks)
     print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
+    return
+
+def Maine(url):
+    browser.get(url)
+    bodyContent = browser.find_element_by_css_selector("div[id='bodyContent']")
+    ul_ele = bodyContent.find_elements_by_css_selector("ul")
+    li_ele = []
+    a_ele = []
+    for i in ul_ele:
+        j = i.find_elements_by_css_selector("li")
+        li_ele = li_ele + j
+    for k in li_ele:
+        allLinks = k.find_elements_by_css_selector("a")
+        if len(allLinks)>0:
+            a_ele.append(allLinks[0])
+    links = [link.get_attribute('href') for link in a_ele]
+    cleanLinks = []
+    #and not(any(x in val for x in blockList))
+    for val in links: 
+        if val != None and ("wikipedia.org" in val) : 
+            cleanLinks.append(val)
+    peopleLinks = []
+    startIndex = cleanLinks.index('https://en.wikipedia.org/wiki/Angela_Adams')
+    endIndex = cleanLinks.index('https://en.wikipedia.org/wiki/Nick_Wyman')
+    for i in range(startIndex,endIndex+1):
+        peopleLinks.append(cleanLinks[i])
+    print(peopleLinks)
+    print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
+    return
+
+def Maryland(url):
+    browser.get(url)
+    bodyContent = browser.find_element_by_css_selector("div[id='bodyContent']")
+    ul_ele = bodyContent.find_elements_by_css_selector("ul")
+    li_ele = []
+    a_ele = []
+    for i in ul_ele:
+        j = i.find_elements_by_css_selector("li")
+        li_ele = li_ele + j
+    for k in li_ele:
+        allLinks = k.find_elements_by_css_selector("a")
+        if len(allLinks)>0:
+            a_ele.append(allLinks[0])
+    links = [link.get_attribute('href') for link in a_ele]
+    cleanLinks = []
+    #and not(any(x in val for x in blockList))
+    for val in links: 
+        if val != None and ("wikipedia.org" in val) : 
+            cleanLinks.append(val)
+    peopleLinks = []
+    startIndex = cleanLinks.index('https://en.wikipedia.org/wiki/Spiro_T._Agnew')
+    endIndex = cleanLinks.index('https://en.wikipedia.org/wiki/George_Young_(American_football_executive)')
+    for i in range(startIndex,endIndex+1):
+        peopleLinks.append(cleanLinks[i])
+    print(peopleLinks)
+    print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
+    return
+
+def Massachusetts(url):
+    browser.get(url)
+    bodyContent = browser.find_element_by_css_selector("div[id='bodyContent']")
+    ul_ele = bodyContent.find_elements_by_css_selector("ul")
+    li_ele = []
+    a_ele = []
+    for i in ul_ele:
+        j = i.find_elements_by_css_selector("li")
+        li_ele = li_ele + j
+    for k in li_ele:
+        allLinks = k.find_elements_by_css_selector("a")
+        if len(allLinks)>0:
+            a_ele.append(allLinks[0])
+    links = [link.get_attribute('href') for link in a_ele]
+    cleanLinks = []
+    #and not(any(x in val for x in blockList))
+    for val in links: 
+        if val != None and ("wikipedia.org" in val) : 
+            cleanLinks.append(val)
+    peopleLinks = []
+    startIndex = cleanLinks.index('https://en.wikipedia.org/wiki/Lucius_W._Briggs')
+    endIndex = cleanLinks.index('https://en.wikipedia.org/wiki/Bernard_Wolfman')
+    for i in range(startIndex,endIndex+1):
+        peopleLinks.append(cleanLinks[i])
+    print(peopleLinks)
+    print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
+    return
+
+def Michigan(url):
+    browser.get(url)
+    bodyContent = browser.find_element_by_css_selector("div[id='bodyContent']")
+    ul_ele = bodyContent.find_elements_by_css_selector("ul")
+    li_ele = []
+    a_ele = []
+    for i in ul_ele:
+        j = i.find_elements_by_css_selector("li")
+        li_ele = li_ele + j
+    for k in li_ele:
+        allLinks = k.find_elements_by_css_selector("a")
+        if len(allLinks)>0:
+            a_ele.append(allLinks[0])
+    links = [link.get_attribute('href') for link in a_ele]
+    cleanLinks = []
+    #and not(any(x in val for x in blockList))
+    for val in links: 
+        if val != None and ("wikipedia.org" in val) : 
+            cleanLinks.append(val)
+    peopleLinks = []
+    startIndex = cleanLinks.index('https://en.wikipedia.org/wiki/Ford_Beebe')
+    endIndex = cleanLinks.index('https://en.wikipedia.org/wiki/Floyd_Wilcox')
+    for i in range(startIndex,endIndex+1):
+        peopleLinks.append(cleanLinks[i])
+    print(peopleLinks)
+    print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
+    return
+
+def Minnesota(url):
+    browser.get(url)
+    bodyContent = browser.find_element_by_css_selector("div[id='bodyContent']")
+    ul_ele = bodyContent.find_elements_by_css_selector("ul")
+    li_ele = []
+    a_ele = []
+    for i in ul_ele:
+        j = i.find_elements_by_css_selector("li")
+        li_ele = li_ele + j
+    for k in li_ele:
+        allLinks = k.find_elements_by_css_selector("a")
+        if len(allLinks)>0:
+            a_ele.append(allLinks[0])
+    links = [link.get_attribute('href') for link in a_ele]
+    cleanLinks = []
+    #and not(any(x in val for x in blockList))
+    for val in links: 
+        if val != None and ("wikipedia.org" in val) : 
+            cleanLinks.append(val)
+    peopleLinks = []
+    startIndex = cleanLinks.index('https://en.wikipedia.org/wiki/Johan_Arnd_Aasgaard')
+    endIndex = cleanLinks.index('https://en.wikipedia.org/wiki/Ben_Wyatt')
+    for i in range(startIndex,endIndex+1):
+        peopleLinks.append(cleanLinks[i])
+    print(peopleLinks)
+    print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
+    return
+
+def Mississippi(url):
+    browser.get(url)
+    bodyContent = browser.find_element_by_css_selector("div[id='bodyContent']")
+    ul_ele = bodyContent.find_elements_by_css_selector("ul")
+    li_ele = []
+    a_ele = []
+    for i in ul_ele:
+        j = i.find_elements_by_css_selector("li")
+        li_ele = li_ele + j
+    for k in li_ele:
+        allLinks = k.find_elements_by_css_selector("a")
+        if len(allLinks)>0:
+            a_ele.append(allLinks[0])
+    links = [link.get_attribute('href') for link in a_ele]
+    cleanLinks = []
+    #and not(any(x in val for x in blockList))
+    for val in links: 
+        if val != None and ("wikipedia.org" in val) : 
+            cleanLinks.append(val)
+    peopleLinks = []
+    startIndex = cleanLinks.index('https://en.wikipedia.org/wiki/James_Bevel')
+    endIndex = cleanLinks.index('https://en.wikipedia.org/wiki/Toby_Turner')
+    for i in range(startIndex,endIndex+1):
+        peopleLinks.append(cleanLinks[i])
+    print(peopleLinks)
+    print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
+    return
+
+def Missouri(url):
+    browser.get(url)
+    bodyContent = browser.find_element_by_css_selector("div[id='bodyContent']")
+    ul_ele = bodyContent.find_elements_by_css_selector("ul")
+    li_ele = []
+    a_ele = []
+    for i in ul_ele:
+        j = i.find_elements_by_css_selector("li")
+        li_ele = li_ele + j
+    for k in li_ele:
+        allLinks = k.find_elements_by_css_selector("a")
+        if len(allLinks)>0:
+            a_ele.append(allLinks[0])
+    links = [link.get_attribute('href') for link in a_ele]
+    cleanLinks = []
+    #and not(any(x in val for x in blockList))
+    for val in links: 
+        if val != None and ("wikipedia.org" in val) : 
+            cleanLinks.append(val)
+    peopleLinks = []
+    startIndex = cleanLinks.index('https://en.wikipedia.org/wiki/Helen_Andelin')
+    endIndex = cleanLinks.index('https://en.wikipedia.org/wiki/Roy_Wilkins')
+    for i in range(startIndex,endIndex+1):
+        peopleLinks.append(cleanLinks[i])
+    print(peopleLinks)
+    print(len(cleanLinks))
+    global totalCount 
+    totalCount += len(cleanLinks)
     return
 
 #MAIN PROGRAM
+totalCount = 0
 browser.get('https://en.wikipedia.org/wiki/Lists_of_Americans')
 bodyContent = browser.find_element_by_css_selector("div[id='bodyContent']")
 allBlocks = bodyContent.find_elements_by_css_selector("div[class='div-col columns column-width']")
@@ -495,24 +741,32 @@ stateNameList = [i.text for i in stateList]
 stateLinkList = [i.find_element_by_css_selector("a").get_attribute('href') for i in stateList]
 
 
-#Alabama(stateLinkList[0])
-#Alaska(stateLinkList[1])
-#Arizona(stateLinkList[2])
-#Arkansas(stateLinkList[3])
-#California(stateLinkList[4])    
-#Colorado(stateLinkList[5])
-#Connecticut(stateLinkList[6])
-#Delaware(stateLinkList[7])  
-#Florida(stateLinkList[8])  
-#Georgia(stateLinkList[9])
-#Hawaii(stateLinkList[10])
-#Idaho(stateLinkList[11])
-#Illinois(stateLinkList[12])
-#Indiana(stateLinkList[13])
-#Iowa(stateLinkList[14])
-#Kansas(stateLinkList[15])
-#Kentucky(stateLinkList[16])
+Alabama(stateLinkList[0])
+Alaska(stateLinkList[1])
+Arizona(stateLinkList[2])
+Arkansas(stateLinkList[3])
+California(stateLinkList[4])    
+Colorado(stateLinkList[5])
+Connecticut(stateLinkList[6])
+Delaware(stateLinkList[7])  
+Florida(stateLinkList[8])  
+Georgia(stateLinkList[9])
+Hawaii(stateLinkList[10])
+Idaho(stateLinkList[11])
+Illinois(stateLinkList[12])
+Indiana(stateLinkList[13])
+Iowa(stateLinkList[14])
+Kansas(stateLinkList[15])
+Kentucky(stateLinkList[16])
 Louisiana(stateLinkList[17])
+Maine(stateLinkList[18])
+Maryland(stateLinkList[19])
+Massachusetts(stateLinkList[20])
+Michigan(stateLinkList[21])
+Minnesota(stateLinkList[22])
+Mississippi(stateLinkList[23])
+Missouri(stateLinkList[24])
 
+print(totalCount)
 browser.quit()
  
