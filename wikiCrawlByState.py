@@ -1,7 +1,20 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-browser = webdriver.Chrome()
+
+'''->TODO '''
+#def check_repeat:
+'''<- '''
+
+'''->disable images to get faster'''
+chrome_options = webdriver.ChromeOptions()
+prefs = {"profile.managed_default_content_settings.images": 2}
+chrome_options.add_experimental_option("prefs", prefs)
+'''<-'''
+
+#browser = webdriver.Chrome()
+browser = webdriver.Chrome(chrome_options=chrome_options)
+
 #blockList = ["List_of_people", "Academy_of_Honor", "people_from", "_Alabama", "Category:", "Portal:", "_area", "_Area", "Template_", "Template:", "_Plateau", "_Shore", "_District", "Valley", "_Region", "(United_States)", "_Plain", "Alabama_"]
 
 
@@ -730,6 +743,271 @@ def Missouri(url):
     totalCount += len(cleanLinks)
     return
 
+'''=>chang's half'''
+temp_indices = []
+
+def vcard_state(url, state):
+    sub_counter = 0 # for counting people in this state
+    browser.get(url)
+    persons = browser.find_elements_by_css_selector("span[class='vcard']")
+    for p in persons:
+        person = p.find_element_by_tag_name('a') #note i put "element" here, not "elements".
+        results.append(person)
+        sub_counter += 1
+    print(state, 'has', str(sub_counter), 'people')
+    global totalCount
+    totalCount += sub_counter
+
+def ul_state(url, state):
+    sub_counter = 0 #for counting people in this state
+    browser.get(url)
+    sections = browser.find_elements_by_css_selector('ul')
+    for i in temp_indices:
+        persons = sections[i].find_elements_by_tag_name('li')
+
+        for p in persons:  
+#            print(i, sub_counter)
+            allLinks = p.find_elements_by_tag_name('a')
+            if (len(allLinks) == 0):
+                continue
+            person = allLinks[0]
+#            print(p.get_attribute('class'))
+#            print('hi')
+            '''->in case of gallery and exclude weird [li]s:'''
+            if p.get_attribute('class') == 'gallerybox':
+#                print(allLinks[0].get_attribute('href'))
+#                print(allLinks[1].get_attribute('href'))
+                person = allLinks[1]
+            elif p.get_attribute('class') != '':
+                continue
+            '''<-'''
+#            print(person.get_attribute('href'))
+            results.append(person)
+            sub_counter += 1
+#        print('---')
+#        break
+    print(state, 'has', str(sub_counter), 'people')
+    global totalCount
+    totalCount += sub_counter
+    
+def test_ul_state(url, state):
+    print('----------', state, '----------')
+    browser.get(url)
+    sections = browser.find_elements_by_css_selector('ul')
+    for i in range(0, 200):        
+#    for i in temp_indices:        
+        print(i, sections[i].find_element_by_tag_name('li').text)
+#        break
+    return
+
+def Montana(url):
+    return vcard_state(url, 'Montana')
+
+def Nebraska(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(2,15):   #2-14
+        temp_indices.append(i)
+    temp_indices.append(16)
+    return ul_state(url, 'Nebraska')
+
+def Nevada(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(3,15):   #3-14
+        temp_indices.append(i)
+    return ul_state(url, 'Nevada')
+
+def New_Hampshire(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(2,21):   #2-20
+        temp_indices.append(i)
+    return ul_state(url, 'New_Hampshire')
+
+def New_Jersey(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(2,9):   #2-8
+        temp_indices.append(i)
+    return ul_state(url, 'New_Jersey')
+
+def New_Mexico(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(2,14):   #2-13
+        temp_indices.append(i)
+    return ul_state(url, 'New_Mexico')
+
+def New_York(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(4,34):   #4-33
+        temp_indices.append(i)
+    return ul_state(url, 'New_York')
+
+def North_Carolina(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(1,23):   #1-22
+        temp_indices.append(i)
+    return ul_state(url, 'North_Carolina')
+
+def North_Dakota(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(1,5):   #1-4
+        temp_indices.append(i)
+    return ul_state(url, 'North_Dakota')
+ 
+'''TODO: redlink'''
+def Ohio(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(1,36):   #1-35
+        temp_indices.append(i)
+    return ul_state(url, 'Ohio')
+ 
+def Oklahoma(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(1,23):   #1-22
+        temp_indices.append(i)
+    return ul_state(url, 'Oklahoma')
+ 
+def Oregon(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(2,26):   #2-25
+        temp_indices.append(i)
+    return ul_state(url, 'Oregon')
+ 
+    '''TODO: redlink'''
+def Pennsylvania(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(1,35):   #1-34
+        temp_indices.append(i)
+    return ul_state(url, 'Pennsylvania')
+ 
+def Rhode_Island(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(1,17):   #1-16
+        temp_indices.append(i)
+    return ul_state(url, 'Rhode_Island')
+ 
+def South_Carolina(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(3,16):   #1-15
+        temp_indices.append(i)
+    return ul_state(url, 'South_Carolina')
+ 
+def South_Dakota(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(1,14):   #1-13
+        temp_indices.append(i)
+    return ul_state(url, 'South_Dakota')
+ 
+def Tennessee(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(2,26):   #2-25
+        temp_indices.append(i)
+    return ul_state(url, 'Tennessee')
+ 
+def Texas(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(6,127):   #6-126
+        temp_indices.append(i)
+    return ul_state(url, 'Texas')
+ 
+def Utah(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(2,27):   #2-26
+        temp_indices.append(i)
+    return ul_state(url, 'Utah')
+ 
+def Vermont(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(2,27):   #2-26
+        temp_indices.append(i)
+    return ul_state(url, 'Vermont')
+ 
+def Virginia(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(2,32):   #2-31
+        temp_indices.append(i)
+    return ul_state(url, 'Virginia')
+ 
+def Washington(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(2,27):   #2-26
+        temp_indices.append(i)
+    return ul_state(url, 'Washington')
+ 
+def West_Virginia(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(1,16):   #1-15
+        temp_indices.append(i)
+    return ul_state(url, 'West_Virginia')
+ 
+def Wisconsin(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(3,45):   #3-44
+        temp_indices.append(i)
+    return ul_state(url, 'Wisconsin')
+ 
+def Wyoming(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(2,13):   #2-12
+        temp_indices.append(i)
+    return ul_state(url, 'Wyoming')
+
+
+def American_Samoa(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(1,15):   #1-14
+        temp_indices.append(i)
+    return ul_state(url, 'American_Samoa')
+
+def Guam(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(5,18):   #5-17
+        temp_indices.append(i)
+    return ul_state(url, 'Guam')
+
+
+def Puerto_Rico(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(5,136):   #5-135
+        temp_indices.append(i)
+    return ul_state(url, 'Puerto_Rico')
+ 
+def United_States_Virgin_Islands(url):
+    global temp_indices
+    temp_indices = []
+    for i in range(1,12):   #1-11
+        temp_indices.append(i)
+    return ul_state(url, 'United_States_Virgin_Islands')
+'''<='''
+
+
+
+
 #MAIN PROGRAM
 totalCount = 0
 browser.get('https://en.wikipedia.org/wiki/Lists_of_Americans')
@@ -740,6 +1018,10 @@ stateList = stateBlock.find_elements_by_css_selector("li")
 stateNameList = [i.text for i in stateList]
 stateLinkList = [i.find_element_by_css_selector("a").get_attribute('href') for i in stateList]
 
+territoryBlock = allBlocks[2]
+territoryList = territoryBlock.find_elements_by_css_selector("li")
+territoryNameList = [i.text for i in territoryList]
+territoryLinkList = [i.find_element_by_css_selector("a").get_attribute('href') for i in territoryList]
 
 Alabama(stateLinkList[0])
 Alaska(stateLinkList[1])
@@ -766,6 +1048,38 @@ Michigan(stateLinkList[21])
 Minnesota(stateLinkList[22])
 Mississippi(stateLinkList[23])
 Missouri(stateLinkList[24])
+
+
+Montana(stateLinkList[25])
+Nebraska(stateLinkList[26])
+Nevada(stateLinkList[27])
+New_Hampshire(stateLinkList[28])
+New_Jersey(stateLinkList[29])
+New_Mexico(stateLinkList[30])
+New_York(stateLinkList[31])
+North_Carolina(stateLinkList[32])
+North_Dakota(stateLinkList[33])
+Ohio(stateLinkList[34])
+Oklahoma(stateLinkList[35])
+Oregon(stateLinkList[36])
+Pennsylvania(stateLinkList[37])
+Rhode_Island(stateLinkList[38])
+South_Carolina(stateLinkList[39])
+South_Dakota(stateLinkList[40])
+Tennessee(stateLinkList[41])
+Texas(stateLinkList[42])
+Utah(stateLinkList[43])
+Vermont(stateLinkList[44])
+Virginia(stateLinkList[45])
+Washington(stateLinkList[46])
+West_Virginia(stateLinkList[47])
+Wisconsin(stateLinkList[48])
+Wyoming(stateLinkList[49])
+
+American_Samoa(territoryLinkList[0])
+Guam(territoryLinkList[1])
+Puerto_Rico(territoryLinkList[2])
+United_States_Virgin_Islands(territoryLinkList[3])
 
 print(totalCount)
 browser.quit()
